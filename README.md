@@ -26,5 +26,5 @@ trivy image --severity HIGH,CRITICAL --ignore-unfixed <image>
 ```
 
 ### Reference files: 
-- ./node-react/back-end/Dockerfile.old
-- ./node-react/back-end/Dockerfile
+- ./back-end/Dockerfile.old
+- ./back-end/Dockerfile
