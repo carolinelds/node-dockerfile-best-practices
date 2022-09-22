@@ -1,0 +1,40 @@
+services:
+
+  postgres_students_db_dev:
+    image: postgres:14
+    container_name: postgres_students_db_dev
+    restart: always
+    ports:
+      - 5432:5432
+    env_file:
+      - ./back-end/.env.development
+    volumes:
+      - pg_students_db_dev:/var/lib/postgresql/data
+    init: true
+
+  node_students_app_dev:
+    container_name: node_students_app_dev
+    build: 
+      context: ./back-end
+      dockerfile: Dockerfile.dev
+    ports:
+      - 5001:5000
+    depends_on:
+      - postgres_students_db_dev
+    env_file:
+      - ./back-end/.env.development
+    init: true
+
+  react_students_app_dev:
+    container_name: react_students_app_dev
+    build: 
+      context: ./front-end
+      dockerfile: Dockerfile.dev
+    ports:
+      - 3000:3000
+    env_file:
+      - ./front-end/.env.development
+    init: true
+
+volumes:
+  pg_students_db_dev:

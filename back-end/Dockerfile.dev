@@ -1,0 +1,17 @@
+FROM node:16 
+
+ENV NODE_ENV development
+
+WORKDIR /app
+
+COPY package.json package-lock.json tsconfig.json entrypoint.sh ./
+
+RUN chmod +x entrypoint.dev.sh
+
+RUN ["npm", "ci"]
+
+EXPOSE 5000
+
+COPY . .
+
+ENTRYPOINT ["/app/entrypoint.dev.sh"]
